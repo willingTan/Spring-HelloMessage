@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING/DTD BEAN/EN"
+"http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<bean id="helloWorld" class="com.learn.spring.hello.HelloWorld"></bean>
+	<bean id="helloChina" class="com.learn.spring.hello.HelloChina"></bean>
+	<!-- 仅仅需要通过修改配置文件，即可做到类的创建和切换的IOC原理 -->
+	<bean id="person" class="com.learn.spring.hello.Person">
+		<property name="helloMessage" ref="helloWorld"></property>
+	</bean>
+</beans>

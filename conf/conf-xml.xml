@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   http://www.springframework.org/schema/beans/spring-beans.xsd
+	   http://www.springframework.org/schema/aop
+	   http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
+	   <aop:aspectj-autoproxy/>
+	   <bean id="interceptor" class="com.learn.spring.aop.xml.StuInterceptor"></bean>
+	   <bean id="stu" class="com.learn.spring.aop.xml.Student"></bean>
+	   <!-- 这里的bean不能用单引用，必须在后面加入</bean>这样才是可以的，但引用是不行的，特别注意！！！ -->
+	   
+	   <aop:config>
+	   		<aop:aspect id="stuInterceptor" ref="interceptor">
+	   			<aop:before 
+	   			pointcut="execution(* com.learn.spring.aop.aspect.Student.print(..))"
+	   			method="printBeforeAdvice" />
+	   			<aop:after-returning 
+	   			pointcut="execution(* com.learn.spring.aop.aspect.Student.print(..))"
+	   			method="printAfterAdvice" arg-names="name" />
+	   			<aop:after 
+	   			pointcut="execution(* com.learn.spring.aop.aspect.Student.print(..))"
+	   			method="finallyAdvice" />
+	   			<aop:around 
+	   			pointcut="execution(* com.learn.spring.aop.aspect.Student.print(..))"
+	   			method="printAroundAdvice" arg-names="name" />
+	   		</aop:aspect>
+	   </aop:config>
+</beans> 
